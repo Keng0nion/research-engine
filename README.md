@@ -4,7 +4,7 @@
 
 **Research Engine v2** 是一个面向 AI Agent 的统一多平台研究基础设施：不再依赖单一搜索引擎，而是把「多引擎聚合搜索 + 学术数据库 + 全文获取 + 证据与引文情报 + 持久化研究记录」收进一条命令（`researchctl`）和一个 Agent 技能里。
 
-建立日期：2026 年 11 月 17 日。许可证：MIT（见 `LICENSE`）。
+建立日期：2026 年 11 月 17 日。许可证：MIT（见 `LICENSE`（许可证）与 `THIRD_PARTY_NOTICES.md`（第三方声明））。
 
 ---
 
@@ -257,7 +257,7 @@ research-engine/
 
 ## 许可证与第三方声明
 
-- 本仓库第一方代码：MIT（`LICENSE`）。
+- 本仓库第一方代码：MIT（`LICENSE`（许可证）与 `THIRD_PARTY_NOTICES.md`（第三方声明））。
 - 技能文件来自上游 MIT 仓库，来源与 revision 存证见 `docs/GITHUB-REPOSITORY-RESEARCH.md`；上游许可证适用于这些文件。
 - SearXNG 为 AGPL-3.0：个人自托管使用无披露义务；若你修改后对外提供服务，AGPL 第 13 条要求向用户提供对应源码。
 - 我们审计但未打包的第三方项目各自许可证见审计报告；无许可证项目（如 wong2/mcp-jina-reader）代码未被复用。

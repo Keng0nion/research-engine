@@ -19,14 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-Third-party notices:
-
-- Bundled academic skills under skills/ originate from MIT-licensed upstream
-  repositories; their exact revisions and provenance are recorded in
-  `docs/GITHUB-REPOSITORY-RESEARCH.md` and in `RESEARCH-SKILLS-ORIGINS.md`
-  (when installed). Upstream licenses apply to those files.
-- SearXNG (self-hosted search backend) is AGPL-3.0; self-hosting for personal
-  use carries no source-disclosure obligation. See its own LICENSE.
-- All other first-party code in this repository is MIT as above.
