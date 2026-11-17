@@ -34,6 +34,7 @@ def distinctive_terms(q: str) -> list[str]:
 def main() -> None:
     store = Store(ROOT / "research")
     fetcher = Fetcher(ROOT)
+    recs: list[dict] = []
     with OUT.open("w", encoding="utf-8") as out:
         for item in QUESTIONS:
             sid = store.create_session("BENCH " + str(item["n"]) + ": " + item["q"],
@@ -90,8 +91,26 @@ def main() -> None:
             }
             out.write(json.dumps(rec, ensure_ascii=False) + "\n")
             out.flush()
+            recs.append(rec)
             print("[" + str(item["n"]) + "/12] ENGINE:", len(docs), "docs,", academic_docs, "academic,",
                   "ft " + str(retrieved) + "/" + str(attempted), wall_ms, "ms, errors", summary["totals"]["errors"], flush=True)
+    # trend tracking (P2-13)
+    try:
+        import datetime
+        n = len(recs)
+        line = {
+            "ts": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "questions": n,
+            "avg_unique_docs": round(sum(r["unique_docs"] for r in recs) / n, 2),
+            "avg_academic_docs": round(sum(r["academic_docs"] for r in recs) / n, 2),
+            "fulltext_rate": round(sum(r["fulltext_retrieved"] for r in recs) / max(1, sum(r["fulltext_attempted"] for r in recs)), 3),
+            "avg_latency_ms": int(sum(r["latency_ms"] for r in recs) / n),
+            "provider_errors": sum(r["errors"] for r in recs),
+        }
+        with (ROOT / "benchmarks" / "trend.jsonl").open("a", encoding="utf-8") as tf:
+            tf.write(json.dumps(line, ensure_ascii=False) + "\n")
+    except Exception:
+        pass
     store.close()
 
 

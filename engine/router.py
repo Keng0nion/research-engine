@@ -14,13 +14,24 @@ DOMAIN_PROVIDERS: dict[str, list[str]] = {
     "physics":  ["arxiv", "openalex", "crossref", "searxng"],
     "chem":     ["crossref", "openalex", "pubmed", "searxng"],
     "med":      ["pubmed", "europepmc", "openalex", "searxng"],
-    "zh":       ["searxng", "anysearch", "openalex", "crossref"],
-    "se":       ["searxng", "anysearch"],
-    "news":     ["searxng", "anysearch"],
-    "general":  ["searxng", "anysearch", "openalex", "crossref", "semanticscholar", "arxiv"],
+    "zh":       ["searxng", "openalex", "crossref"],
+    "se":       ["searxng"],
+    "news":     ["searxng"],
+    "general":  ["searxng", "openalex", "crossref", "semanticscholar", "arxiv"],
 }
+# anysearch is available via explicit --providers anysearch (its CLI output is
+# text, ~10s per call), but kept out of default fan-out sets.
 
-_SEARXNG_CATEGORY = {"news": "news", "zh": "general"}
+_SEARXNG_CATEGORY = {
+    "news": "news",
+    "zh": "general",
+    "bio": "general,science",
+    "med": "general,science",
+    "cs": "general,science,it",
+    "math": "general,science",
+    "physics": "general,science",
+    "chem": "general,science",
+}
 
 _KEYWORDS = (
     ("bio", ("protein", "gene", "genome", "cell", "bacteria", "enzyme", "rna", "dna",

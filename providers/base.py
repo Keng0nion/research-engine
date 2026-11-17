@@ -45,6 +45,33 @@ USER_AGENT = "research-engine/0.1 (personal research tool; contact via RE_CONTAC
 _DOH_URL = "https://1.1.1.1/dns-query"
 _doh_cache: dict[str, tuple[float, list[str]]] = {}
 _DOH_TTL = 300.0
+_DOH_DISK_TTL = 3600.0
+
+
+def _doh_disk_path() -> "Path":
+    from pathlib import Path
+    return Path(__file__).resolve().parents[1] / "cache" / "doh.json"
+
+
+def _doh_disk_load() -> dict:
+    import json as _json
+    try:
+        p = _doh_disk_path()
+        if p.exists():
+            return _json.loads(p.read_text(encoding="utf-8"))
+    except (ValueError, OSError):
+        pass
+    return {}
+
+
+def _doh_disk_save(data: dict) -> None:
+    import json as _json
+    try:
+        p = _doh_disk_path()
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(_json.dumps(data), encoding="utf-8")
+    except OSError:
+        pass
 
 
 def contact_email() -> str | None:
@@ -56,6 +83,11 @@ def _doh_resolve(host: str) -> list[str]:
     cached = _doh_cache.get(host)
     if cached and now - cached[0] < _DOH_TTL:
         return cached[1]
+    disk = _doh_disk_load().get(host)
+    if disk and now - float(disk.get("ts", 0)) < _DOH_DISK_TTL:
+        ips = [str(x) for x in disk.get("ips", [])]
+        _doh_cache[host] = (now, ips)
+        return ips
     ips: list[str] = []
     try:
         with httpx.Client(timeout=10.0) as client:
@@ -68,6 +100,10 @@ def _doh_resolve(host: str) -> list[str]:
     except (httpx.HTTPError, ValueError):
         ips = []
     _doh_cache[host] = (now, ips)
+    if ips:
+        disk_all = _doh_disk_load()
+        disk_all[host] = {"ts": now, "ips": ips}
+        _doh_disk_save(disk_all)
     return ips
 
 

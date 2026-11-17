@@ -37,6 +37,19 @@
 7. 会话轮数计数器与 `--round` 不同步 → 搜索后自动对齐；
 8. uv 可编辑安装 .pth 两次失效 → 弃用，改 PYTHONPATH 包装双入口。
 
+## v2.1 优化批（2026 年 11 月 17 日，第二批）
+
+- 查询级 TTL 缓存（`engine/cache.py`，成功响应才缓存，`--no-cache` 绕过）；
+- 供应商熔断器 + 每供应商并发信号量 + 抖动退避（`engine/executor.py`，参数在 `config/engine.yaml`）；
+- `digest` 命令：全文抽取式摘要 + 建议数字（`engine/digest.py`，可选 `RE_LLM_*` 钩子经 `fetcher.safe_post_json` 走 SSRF 校验）；
+- `stats` 命令：供应商成功率与延迟分位（`engine/stats.py`）；
+- `session export`：report.md + session.json + references.bib（`engine/export.py`）；
+- 获取适配器注册表（`fetcher.FETCH_ADAPTERS`：arxiv/europepmc/pubmed 规则结构化 + Unpaywall OA 解析）；
+- DoH 解析缓存持久化（`cache/doh.json`）；
+- 学术域路由加 SearXNG `science` 分类；anysearch 移出默认扇出；
+- 基准追加 `benchmarks/trend.jsonl`；
+- 测试新增 `tests/test_optimizations.py`（缓存/熔断/digest/数字抽取/bib/stats 全绿；修复了分句与指标词配对两个真实 bug）。
+
 ## 明确未执行（用户决策项）
 
 - 付费服务（Exa/Firecrawl/Parallel CLI/Tavily 等）未启用、未注册；

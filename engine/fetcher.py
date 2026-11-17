@@ -80,6 +80,32 @@ def url_is_safe(url: str) -> tuple[bool, str]:
     return True, "ok"
 
 
+def _is_private_host(host: str) -> bool:
+    if host in ("localhost", "127.0.0.1", "::1"):
+        return True
+    try:
+        return ipaddress.ip_address(host).is_private
+    except ValueError:
+        return False
+
+
+def safe_post_json(url: str, payload: dict, headers: dict | None = None,
+                   timeout: float = 60.0, allow_private: bool = False) -> httpx.Response:
+    """POST JSON with the same SSRF policy as fetch(): public hosts only,
+    unless allow_private=True and the host is loopback/private (opt-in for
+    local LLM endpoints)."""
+    ok, why = url_is_safe(url)
+    if not ok and allow_private:
+        host = urlsplit(url).hostname or ""
+        ok = _is_private_host(host)
+    if not ok:
+        from providers.base import ProviderError
+        raise ProviderError("http_error", "blocked unsafe url: " + why)
+    with httpx.Client(timeout=timeout, follow_redirects=False,
+                      headers=dict({"User-Agent": UA}, **(headers or {}))) as client:
+        return client.post(url, json=payload)
+
+
 class Fetcher:
     def __init__(self, project_root: Path):
         self.project_root = Path(project_root)
@@ -301,10 +327,42 @@ class Fetcher:
         return str(path)
 
 
+# ---------- fetch adapters (per-platform best full-text routes) ----------
+
+FETCH_ADAPTERS: dict[str, object] = {}
+
+
+def register_fetch_adapter(platform: str):
+    """Register a platform adapter: fn(doc_row, meta) -> list[(url, kind)]."""
+    def deco(fn):
+        FETCH_ADAPTERS[platform] = fn
+        return fn
+    return deco
+
+
+@register_fetch_adapter("arxiv")
+def _arxiv_adapter(doc, meta):
+    return [(meta["pdf_url"], "paper")] if meta.get("pdf_url") else []
+
+
+@register_fetch_adapter("europepmc")
+def _europepmc_adapter(doc, meta):
+    return [(meta["fulltext_xml_url"], "paper")] if meta.get("fulltext_xml_url") else []
+
+
+@register_fetch_adapter("pubmed")
+def _pubmed_adapter(doc, meta):
+    # PubMed landing pages are bot-challenged (HTTP 203); abstracts arrive via
+    # efetch at search time, so the adapter intentionally returns no URLs and
+    # the canonical landing page is skipped below.
+    return []
+
+
 def acquire_document(store, fetcher: Fetcher, doc_id: int, *, allow_fetch: bool = True) -> dict:
     """Try to obtain the best available text for a stored document and record status.
 
-    Order: known OA pdf (extra.open_access_pdf / oa_url / arxiv pdf) -> canonical URL.
+    Order: platform fetch adapter -> OA pdf/oa_url -> Unpaywall (if email set)
+    -> canonical URL (unless platform adapter marks it skippable).
     Never bypasses access controls; robots and statuses apply.
     """
     doc = store.get_document(doc_id)
@@ -321,20 +379,43 @@ def acquire_document(store, fetcher: Fetcher, doc_id: int, *, allow_fetch: bool 
         meta = {}
 
     candidates: list[tuple[str, str]] = []
+    adapter = FETCH_ADAPTERS.get(doc.get("platform") or "")
+    if adapter:
+        try:
+            candidates.extend(adapter(doc, meta))
+        except Exception:
+            pass
     if meta.get("open_access_pdf"):
         candidates.append((meta["open_access_pdf"], "paper"))
-    if meta.get("fulltext_xml_url"):
-        candidates.append((meta["fulltext_xml_url"], "paper"))
     if meta.get("oa_url"):
         candidates.append((meta["oa_url"], "paper"))
-    if meta.get("pdf_url") and doc.get("platform") == "arxiv":
-        candidates.append((meta["pdf_url"], "paper"))
+    if doc.get("doi"):
+        # legal open-access resolution via Unpaywall (needs RE_CONTACT_EMAIL)
+        try:
+            from providers import get_provider
+            uw = get_provider("unpaywall")
+            if uw.available() is None:
+                info = uw.resolve(doc["doi"])
+                if info and info.get("is_oa"):
+                    if info.get("pdf_url"):
+                        candidates.append((info["pdf_url"], "paper"))
+                    if info.get("best_url"):
+                        candidates.append((info["best_url"], "paper"))
+        except Exception:
+            pass
     if doc.get("canonical_url") and not doc["canonical_url"].startswith(("doi:", "arxiv:", "pmid:")):
-        # pubmed landing pages are bot-challenged; abstracts come via efetch instead
         is_pubmed_landing = doc.get("platform") == "pubmed" and "pubmed.ncbi.nlm.nih.gov" in doc["canonical_url"]
         if not is_pubmed_landing:
             kind = "paper" if doc.get("doc_type") in ("paper", "preprint") else "web"
             candidates.append((doc["canonical_url"], kind))
+    # dedupe preserving order
+    seen_urls = set()
+    deduped: list[tuple[str, str]] = []
+    for url, kind in candidates:
+        if url not in seen_urls:
+            seen_urls.add(url)
+            deduped.append((url, kind))
+    candidates = deduped
 
     if not candidates:
         if doc.get("abstract"):

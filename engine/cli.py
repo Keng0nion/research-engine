@@ -14,9 +14,14 @@ import sys
 from pathlib import Path
 
 from . import citations as citations_mod
+from . import config as cfg
 from . import conflicts as conflicts_mod
+from . import digest as digest_mod
+from . import export as export_mod
 from . import router
+from . import stats as stats_mod
 from . import util
+from .cache import SearchCache
 from .executor import search_many
 from .fetcher import Fetcher, acquire_document
 from .report import build_report, save_report
@@ -85,8 +90,10 @@ def cmd_search(args) -> None:
                               "limit": args.limit, "opts": opts})
         if not tasks:
             _fail("no providers selected")
+        cache = None if args.no_cache else SearchCache(root, ttl_s=int(cfg.budgets().get("cache_ttl_s", 86400)))
         session_id = args.session
         explicit_round = args.round
+        sess = None
         if session_id:
             sess = store.find_session(session_id)
             if not sess:
@@ -95,7 +102,7 @@ def cmd_search(args) -> None:
         round_no = explicit_round if explicit_round is not None else ((sess["rounds_run"] or 0) + 1 if sess else 1)
         summary = search_many(store, session_id, tasks, workers=args.workers,
                               timeout=args.timeout, round_no=round_no,
-                              store_results=True)
+                              store_results=True, cache=cache, use_cache=not args.no_cache)
         # only an explicitly passed --round syncs the session counter
         if session_id and explicit_round is not None:
             sess_row = store.get_session(session_id)
@@ -211,6 +218,13 @@ def cmd_session(args) -> None:
             _emit(args, {"session_id": sess["id"], "rounds_run": rounds,
                          "updated": sorted(fields.keys())},
                   ["session updated: " + sess["id"] + " (rounds=" + str(rounds) + ")"])
+        elif args.action == "export":
+            sess = store.find_session(args.session_id or "")
+            if not sess:
+                _fail("session not found")
+                return
+            result = export_mod.export_session(store, _root(args), sess["id"], Path(args.out) if args.out else None)
+            _emit(args, result, ["exported to " + str(result.get("dir")) + " (" + str(result.get("documents")) + " docs, " + str(result.get("bib_entries")) + " bib entries)"])
         elif args.action == "show":
             sess = store.find_session(args.session_id or "")
             if not sess:
@@ -436,6 +450,45 @@ def cmd_report(args) -> None:
         store.close()
 
 
+# ---------- digest ----------
+
+def cmd_digest(args) -> None:
+    root = _root(args)
+    store = Store(root / "research")
+    try:
+        result = digest_mod.digest_document(store, args.doc, max_chars=args.max_chars, use_llm=not args.no_llm)
+        _emit(args, result, [("digest for doc " + str(args.doc) + ": " + str(result.get("digest_chars")) + " chars, llm=" + str(result.get("llm_used")) + ", path=" + str(result.get("digest_path"))),
+                             "---", (result.get("digest_head") or "")[:500],
+                             "---", "suggested numbers: " + json.dumps(result.get("suggested_numbers") or [], ensure_ascii=False)])
+    finally:
+        store.close()
+
+
+# ---------- stats ----------
+
+def cmd_stats(args) -> None:
+    root = _root(args)
+    store = Store(root / "research")
+    try:
+        sid = None
+        if args.session:
+            sess = store.find_session(args.session)
+            sid = sess["id"] if sess else None
+        data = stats_mod.build_stats(store, root, sid)
+        if args.json:
+            _emit(args, data)
+        else:
+            print("providers (by query count):")
+            for p in data["providers"]:
+                print("  " + p["provider"].ljust(16) + " total=" + str(p["total"]) + " ok=" + str(p["ok"])
+                      + " (" + str(int(p["ok_rate"] * 100)) + "%) p50=" + str(p["p50_latency_ms"]) + "ms"
+                      + " p90=" + str(p["p90_latency_ms"]) + "ms errors=" + json.dumps(p["errors"], ensure_ascii=False))
+            print("access distribution: " + json.dumps(data["access_distribution"], ensure_ascii=False))
+            print("cache: " + str(data["cache_entries"]) + " entries, " + str(data["cache_bytes"]) + " bytes")
+    finally:
+        store.close()
+
+
 # ---------- main ----------
 
 def main(argv=None) -> None:
@@ -468,6 +521,7 @@ def main(argv=None) -> None:
     p.add_argument("--session", default=None)
     p.add_argument("--round", type=int, default=None)
     p.add_argument("--expand", action="store_true", help="add deterministic query variants")
+    p.add_argument("--no-cache", dest="no_cache", action="store_true", help="bypass the result cache")
     p.set_defaults(func=cmd_search)
 
     p = sub_parser("fetch", help="fetch full text for a URL, a stored document, or a doc batch")
@@ -478,7 +532,7 @@ def main(argv=None) -> None:
     p.set_defaults(func=cmd_fetch)
 
     p = sub_parser("session", help="session management")
-    p.add_argument("action", choices=["new", "list", "show", "update"])
+    p.add_argument("action", choices=["new", "list", "show", "update", "export"])
     p.add_argument("question", nargs="?", default=None)
     p.add_argument("--mode", default="standard", choices=["quick", "standard", "deep", "systematic"])
     p.add_argument("--session-id", dest="session_id", default=None)
@@ -487,7 +541,18 @@ def main(argv=None) -> None:
     p.add_argument("--notes", default=None)
     p.add_argument("--status", default=None, choices=[None, "active", "completed", "aborted"])
     p.add_argument("--bump-round", dest="bump_round", action="store_true")
+    p.add_argument("--out", default=None, help="export output directory")
     p.set_defaults(func=cmd_session)
+
+    p = sub_parser("digest", help="compress a full-text document into an evidence digest")
+    p.add_argument("--doc", type=int, required=True)
+    p.add_argument("--max-chars", dest="max_chars", type=int, default=4000)
+    p.add_argument("--no-llm", dest="no_llm", action="store_true", help="force extractive digest (no model call)")
+    p.set_defaults(func=cmd_digest)
+
+    p = sub_parser("stats", help="provider health and latency stats from the query log")
+    p.add_argument("--session", default=None)
+    p.set_defaults(func=cmd_stats)
 
     p = sub_parser("evidence", help="evidence cards")
     p.add_argument("action", choices=["add", "draft", "list", "update"])

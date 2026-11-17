@@ -159,8 +159,14 @@ $CTL report --session <sid>        # 报告骨架落在 research/reports/
 | `citations build/verify/list` | 引文图与核验 |
 | `conflicts detect/list/add/update` | 冲突 |
 | `report --session SID` | 报告骨架 |
+| `digest --doc ID [--max-chars 4000] [--no-llm]` | 全文抽取式摘要 + 建议数字（喂证据卡，省 token） |
+| `stats [--session SID]` | 各供应商成功率 / p50、p90 延迟 / 错误分类 / 缓存占用 |
+| `session export --session-id SID [--out DIR]` | 打包报告 + session.json + references.bib |
+| `search … --no-cache` | 绕过结果缓存 |
 
 全部子命令支持 `--json`。
+
+**v2.1 优化批**（2026 年 11 月 17 日第二批）：查询级 TTL 缓存（`cache/search/`，只缓存成功响应）；供应商熔断器（连续失败 3 次熔断 60 秒）+ 每供应商并发信号量（NCBI 1 并发）+ 抖动退避；学术域自动加 SearXNG `science` 分类；获取适配器注册表（arxiv PDF / Europe PMC JATS / PubMed 落地页跳过 / Unpaywall OA 解析）；DoH 缓存持久化（`cache/doh.json`）；基准趋势追踪（`benchmarks/trend.jsonl`）；可选 LLM 摘要钩子（默认关闭，`RE_LLM_*` 环境变量，私网端点需 `RE_LLM_ALLOW_PRIVATE=1`）。anysearch 因 CLI 无 JSON 输出且较慢，已移出默认扇出，可用 `--providers anysearch` 显式启用。
 
 ### 四种研究模式
 

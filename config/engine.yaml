@@ -11,6 +11,21 @@ budgets:
   max_rounds_default: 3         # 迭代研究默认最大轮数（MODULE 9）
   max_docs_per_session: 400     # 单会话文档上限
   probe_timeout_s: 8            # providers --probe 的连接探针超时
+  cache_ttl_s: 86400            # 搜索结果缓存有效期（秒）
+  circuit_breaker_threshold: 3  # 连续失败几次后熔断供应商
+  circuit_breaker_seconds: 60   # 熔断时长（秒）
+  retry_base_s: 0.5             # 重试退避基数（秒，线性增长 + 抖动）
+  per_provider_max_concurrency: # 每供应商并发上限（信号量）
+    default: 2
+    pubmed: 1                   # NCBI 免 key 3 rps，礼貌起见
+    arxiv: 1
+    semanticscholar: 1
+    unpaywall: 1
+    anysearch: 1
+    europepmc: 2
+    openalex: 2
+    crossref: 2
+    searxng: 3
 
 paths:
   research_root: research       # 相对项目根
