@@ -4,7 +4,7 @@
 
 **Research Engine v2** 是一个面向 AI Agent 的统一多平台研究基础设施：不再依赖单一搜索引擎，而是把「多引擎聚合搜索 + 学术数据库 + 全文获取 + 证据与引文情报 + 持久化研究记录」收进一条命令（`researchctl`）和一个 Agent 技能里。
 
-建立日期：2026 年 11 月 17 日。许可证：MIT（见 `LICENSE`（许可证）与 `THIRD_PARTY_NOTICES.md`（第三方声明））。
+建立日期：2026 年 11 月 17 日。许可证：MIT（见 `LICENSE` 与 `THIRD_PARTY_NOTICES.md`）。
 
 ---
 
