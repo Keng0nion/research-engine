@@ -1,0 +1,14 @@
+[
+  {"n": 1,  "category": "数学", "lang": "en", "q": "Gromov-Wasserstein distance computation algorithms"},
+  {"n": 2,  "category": "生物学", "lang": "en", "q": "CRISPR base editing off-target effects 2024"},
+  {"n": 3,  "category": "化学", "lang": "en", "q": "photocatalytic hydrogen evolution metal-organic frameworks"},
+  {"n": 4,  "category": "物理学", "lang": "en", "q": "room-temperature superconductivity evidence criticism"},
+  {"n": 5,  "category": "计算机科学", "lang": "en", "q": "vector database indexing algorithms comparison"},
+  {"n": 6,  "category": "机器学习", "lang": "en", "q": "retrieval-augmented generation evaluation benchmarks"},
+  {"n": 7,  "category": "AI 研究", "lang": "en", "q": "scaling laws mixture-of-experts language models"},
+  {"n": 8,  "category": "时事新闻", "lang": "en", "q": "open source AI model releases"},
+  {"n": 9,  "category": "GitHub 项目发现", "lang": "en", "q": "open source MCP server web fetch alternative"},
+  {"n": 10, "category": "中文文献", "lang": "zh", "q": "深度学习 蛋白质结构预测 综述"},
+  {"n": 11, "category": "跨学科", "lang": "en", "q": "machine learning climate model downscaling"},
+  {"n": 12, "category": "技术文档", "lang": "en", "q": "PostgreSQL logical replication conflict resolution documentation"}
+]

@@ -1,0 +1,27 @@
+# Research Engine 本机 SearXNG 配置示例（提交版）
+# 使用前复制为 settings.yml 并生成真实密钥：
+#   cp settings.example.yml settings.yml
+#   sed -i '' "s/REPLACE_ME/$(openssl rand -hex 32)/" settings.yml   # macOS
+#   sed -i "s/REPLACE_ME/$(openssl rand -hex 32)/" settings.yml      # Linux
+use_default_settings: true
+
+server:
+  secret_key: "REPLACE_ME"   # 必须替换：openssl rand -hex 32
+  limiter: false             # 单用户回环场景无需机器人防护；启用需 valkey（见 docker-compose.yml）
+  image_proxy: false
+  public_instance: false
+
+search:
+  formats:
+    - html
+    - json                  # 引擎 JSON API（默认仅 html；未启用的 format 返回 403）
+  autocomplete: ""          # 关闭外部自动补全（默认会把输入前缀发给 duckduckgo）
+
+# 实测（2026 年 11 月，住宅 IP）：
+# - google（直连抓取）持续 access denied → 保持禁用（上游默认也是禁用）
+# - google cse / bing / brave / duckduckgo 正常出结果
+engines:
+  - name: google
+    disabled: true
+  - name: bing
+    disabled: false

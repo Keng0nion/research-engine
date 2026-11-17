@@ -1,0 +1,84 @@
+# Research Engine 供应商注册表（SEARCH-PROVIDER-REGISTRY 的可执行版本）
+# kind: rest      = 引擎内原生 HTTP 连接器（无需 key）
+#       cli       = 桥接本机既有 CLI 工具
+#       mcp       = 由 Agent 侧调用的 MCP 工具（引擎不直连，仅登记路由信息）
+#       selfhost  = 本机自托管服务
+
+providers:
+  openalex:
+    kind: rest
+    enabled: true
+    needs_key: false
+    base_url: https://api.openalex.org
+    notes: "学术元数据主力；支持 polite pool（mailto）。无需 key。"
+
+  arxiv:
+    kind: rest
+    enabled: true
+    needs_key: false
+    base_url: https://export.arxiv.org/api/query
+    notes: "预印本（物理/数学/CS/生物）；Atom XML 接口。"
+
+  crossref:
+    kind: rest
+    enabled: true
+    needs_key: false
+    base_url: https://api.crossref.org
+    notes: "DOI 元数据与出版物权威注册库。"
+
+  pubmed:
+    kind: rest
+    enabled: true
+    needs_key: false
+    base_url: https://eutils.ncbi.nlm.nih.gov/entrez/eutils
+    notes: "生物医学文献；E-utilities 免费（3 rps 无 key）。"
+
+  europepmc:
+    kind: rest
+    enabled: true
+    needs_key: false
+    base_url: https://www.ebi.ac.uk/europepmc/webservices/rest
+    notes: "欧洲 PMC；含全文可用性标记（isOpenAccess / fullTextIdList）。"
+
+  semanticscholar:
+    kind: rest
+    enabled: true
+    needs_key: false
+    optional_key_env: S2_API_KEY
+    base_url: https://api.semanticscholar.org/graph/v1
+    notes: "引用图与推荐；无 key 可用（共享限速），S2_API_KEY 可选提速。"
+
+  unpaywall:
+    kind: rest
+    enabled: true
+    needs_key: false
+    requires_email: true
+    base_url: https://api.unpaywall.org/v2
+    notes: "开放获取全文链接解析；必须带 email 参数（RE_CONTACT_EMAIL），未设置时自动禁用。"
+
+  searxng:
+    kind: selfhost
+    enabled: false   # Stage 4 部署后置 true
+    needs_key: false
+    base_url: http://127.0.0.1:8080
+    notes: "本机自托管多引擎聚合（docker, 仅绑定回环地址）。Stage 4 部署。"
+    engines: [google, bing, brave, duckduckgo, wikipedia, mojeek]
+    categories: [general, news, science]
+
+  anysearch:
+    kind: cli
+    enabled: true
+    needs_key: false   # 匿名可用；ANYSEARCH_API_KEY 可选提速
+    runtime_conf: /Users/luna/.claude/skills/anysearch-skill-2.1.0/runtime.conf
+    notes: "既有技能 CLI 桥接；垂直域检索与批量搜索。"
+
+# 以下为 Agent 侧 MCP 工具登记（引擎不直连；供研究技能路由与文档登记）
+mcp_side:
+  duckduckgo:
+    server: mcp-duckduckgo
+    tools: [search, fetch, research, search_and_crawl]
+    notes: "既有 MCP；保留为通用网页兜底。"
+  zotero:
+    server: plugin_zotero (ZCode 官方 Zotero 插件)
+    tools: [search_library, read_fulltext, export_bib, cite, add_item, highlight]
+    notes: "既有插件；研究库持久化（替代第三方 zotero-mcp 安装）。"

@@ -1,0 +1,23 @@
+# Research Engine 运行时预算与限制（PART VII 资源控制）
+# 所有数值可被 CLI 参数覆盖；此处为默认值。
+
+budgets:
+  max_workers: 6                # 并行搜索工作线程上限
+  per_provider_timeout_s: 25    # 单供应商超时
+  fetch_timeout_s: 40           # 单文档下载超时
+  max_retries: 2                # 单请求重试次数（网络类错误）
+  max_doc_bytes: 20000000       # 单文档最大体积（20MB）
+  search_results_per_provider: 10
+  max_rounds_default: 3         # 迭代研究默认最大轮数（MODULE 9）
+  max_docs_per_session: 400     # 单会话文档上限
+  probe_timeout_s: 8            # providers --probe 的连接探针超时
+
+paths:
+  research_root: research       # 相对项目根
+  cache_root: cache
+  logs_root: logs
+
+contact:
+  # 部分公共 API（OpenAlex polite pool、NCBI、Unpaywall）建议/要求提供联系邮箱。
+  # 通过环境变量 RE_CONTACT_EMAIL 提供；未设置时对应功能自动降级或禁用（不会编造邮箱）。
+  email_env: RE_CONTACT_EMAIL

@@ -1,0 +1,15 @@
+# 运行时数据与抓取文档一律不入仓（含版权内容与研究记录）
+research/
+cache/
+logs/
+.venv/
+__pycache__/
+*.pyc
+*.db
+*.db-wal
+*.db-shm
+
+# 本地专属密钥：提交的是 settings.example.yml，真实 settings.yml 不入仓
+providers/searxng/core-config/settings.yml
+
+.DS_Store

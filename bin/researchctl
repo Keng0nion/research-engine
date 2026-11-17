@@ -1,0 +1,5 @@
+#!/bin/bash
+# researchctl 包装脚本：显式注入 PYTHONPATH，不依赖可编辑安装的 .pth 机制
+# （本机 uv 生成的 _editable_impl .pth 时灵时不灵，弃用该路径）
+exec env PYTHONPATH="/Users/luna/Documents/Dev/research-engine${PYTHONPATH:+:$PYTHONPATH}" \
+  /Users/luna/Documents/Dev/research-engine/.venv/bin/python -m engine.cli "$@"

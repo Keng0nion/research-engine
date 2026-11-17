@@ -1,0 +1,55 @@
+# Research Engine 本机 SearXNG（文档化替代部署路径）
+# 本机未安装 docker compose，实际使用等价的 docker run 命令完成部署：
+#   docker run -d --name research-searxng \
+#     --restart unless-stopped \
+#     -p 127.0.0.1:8080:8080 \
+#     -v /Users/luna/Documents/Dev/research-engine/providers/searxng/core-config:/etc/searxng:rw \
+#     -e SEARXNG_BASE_URL=http://127.0.0.1:8080/ \
+#     --cap-drop ALL --cap-add CHOWN --cap-add SETGID --cap-add SETUID \
+#     --log-driver json-file --log-opt max-size=1m --log-opt max-file=1 \
+#     docker.io/searxng/searxng:latest
+# 本文件供将来装好 compose 的机器复现，或启用 limiter 时改用（limiter 需要 valkey）。
+
+services:
+  core:
+    image: docker.io/searxng/searxng:latest
+    container_name: research-searxng
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:8080"    # 仅回环：不对局域网暴露
+    volumes:
+      - ./core-config:/etc/searxng:rw
+    environment:
+      - SEARXNG_BASE_URL=http://127.0.0.1:8080/
+    depends_on:
+      - valkey
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETGID
+      - SETUID
+    logging:
+      driver: json-file
+      options: { max-size: "1m", max-file: "1" }
+
+  # 仅在启用 limiter（settings.yml 中 server.limiter: true）时需要
+  valkey:
+    image: docker.io/valkey/valkey:9-alpine
+    container_name: research-searxng-valkey
+    restart: unless-stopped
+    command: valkey-server --save 30 1 --loglevel warning
+    volumes:
+      - valkey-data:/data
+    cap_drop:
+      - ALL
+    cap_add:
+      - SETGID
+      - SETUID
+      - DAC_OVERRIDE
+    logging:
+      driver: json-file
+      options: { max-size: "1m", max-file: "1" }
+
+volumes:
+  valkey-data:

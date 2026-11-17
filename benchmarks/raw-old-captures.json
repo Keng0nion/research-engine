@@ -1,0 +1,149 @@
+{
+  "system": "duckduckgo-mcp",
+  "captured_at": "2026-11-17",
+  "note": "基线采集经 duckduckgo MCP（limit 15）。题 1 首次返回 0（限流），重试时查询词微调为 Gromov-Wasserstein distance computation algorithms optimal transport。",
+  "captures": [
+    {"n": 1, "results": [
+      {"t": "[2509.04089] Gromov-Wasserstein and optimal transport: from assignment", "u": "https://arxiv.org/abs/2509.04089"},
+      {"t": "Supervised Gromov-Wasserstein Optimal Transport", "u": "https://arxiv.org/html/2401.06266v1"},
+      {"t": "Gromov-Wasserstein example, POT Python Optimal Transport", "u": "https://pythonot.github.io/auto_examples/gromov/plot_gromov.html"},
+      {"t": "Computing the Gromov-Wasserstein Distance between Two Surface Meshes", "u": "https://www.mdpi.com/1999-4893/16/3/131"},
+      {"t": "Entropic Gromov-Wasserstein Distances: Stability and Algorithms", "u": "https://openreview.net/pdf/0d434f6a1f203fac193269ae69bd4e28eb71d25b.pdf"},
+      {"t": "The Z-Gromov-Wasserstein Distance", "u": "https://jmlr.org/papers/volume26/24-2189/24-2189.pdf"},
+      {"t": "Gromov-Wasserstein Distances: Entropic Regularization, Duality", "u": "https://www.lse.ac.uk/statistics/assets/Documents/GW-final.pdf"},
+      {"t": "Entropic Gromov-Wasserstein Distances: Stability and Algorithms (JMLR)", "u": "https://jmlr.org/papers/volume25/24-0039/24-0039.pdf"},
+      {"t": "An Introduction to Gromov-Wasserstein Distances", "u": "https://web.math.ucsb.edu/~kcraig/math/OTReadingSeminar_files/Lecture9_Hua.pdf"},
+      {"t": "Numerical Optimal Transport", "u": "https://optimaltransport.github.io/slides-peyre/GromovWasserstein.pdf"}
+    ]},
+    {"n": 2, "results": [
+      {"t": "Tracking-seq reveals the heterogeneity of off-target effects in CRISPR", "u": "https://www.nature.com/articles/s41587-024-02307-y"},
+      {"t": "Off-target effects in CRISPR-Cas genome editing for human therapeutics", "u": "https://www.sciencedirect.com/science/article/pii/S2162253125001908"},
+      {"t": "Off-target effects in CRISPR-Cas genome editing (Cell)", "u": "https://www.cell.com/molecular-therapy-family/nucleic-acids/fulltext/S2162-2531(25)00190-8"},
+      {"t": "Recent Advancements in Reducing the Off-Target Effect of CRISPR-Cas9", "u": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10802171/"},
+      {"t": "Beyond the promise: evaluating and mitigating off-target effects (Frontiers)", "u": "https://www.frontiersin.org/journals/bioengineering-and-biotechnology/articles/10.3389/fbioe.2023.1339189/full"},
+      {"t": "Identifying off-target effects of genome editing with Tracking-seq", "u": "https://www.nature.com/articles/s41576-024-00775-1"},
+      {"t": "CRISPR 101: Off-Target Effects", "u": "https://blog.addgene.org/crispr-101-off-target-effects"},
+      {"t": "Adenine base editors induce off-target structure variations (Genome Biology)", "u": "https://link.springer.com/article/10.1186/s13059-024-03434-0"},
+      {"t": "Beyond the promise (ResearchGate)", "u": "https://www.researchgate.net/publication/378105222_Beyond_the_promise_evaluating_and_mitigating_off-target_effects_in_CRISPR_gene_editing_for_safer_therapeutics"},
+      {"t": "Reducing CRISPR-Cas9 off-target effects by optically controlled", "u": "https://www.sciencedirect.com/science/article/pii/S2451945624004021"}
+    ]},
+    {"n": 3, "results": [
+      {"t": "Metal-organic frameworks for advancing photocatalytic and electrocatalytic HER", "u": "https://www.sciencedirect.com/science/article/pii/S2213343725042903"},
+      {"t": "Au-Coordinated Motifs with Optimization of Electronic Structure (JACS)", "u": "https://pubs.acs.org/jacsat/article/148/11/11800/5085748/Au-Coordinated-Motifs-with-Optimization-of"},
+      {"t": "Advancements in metal-organic frameworks based photocatalysts", "u": "https://www.sciencedirect.com/science/article/pii/S2590123025029081"},
+      {"t": "Two-dimensional metal-organic frameworks offer all-in-one (Nature Chemistry)", "u": "https://www.nature.com/articles/s41557-026-02133-6"},
+      {"t": "Room temperature photochemical synthesis of metal-organic frameworks", "u": "https://www.nature.com/articles/s41467-026-70927-w"},
+      {"t": "Metal-Covalent Organic Frameworks Boosting Photocatalytic HER", "u": "https://chemistry-europe.onlinelibrary.wiley.com/doi/10.1002/cptc.70187"},
+      {"t": "MOF-based Photocatalysts for Hydrogen Production (RSC)", "u": "https://books.rsc.org/books/edited-volume/2263/chapter/8242036/Metal-Organic-Framework-based-Photocatalysts-for"},
+      {"t": "Recent advances in lanthanide-based metal-organic frameworks", "u": "https://pubs.rsc.org/ya/article/4/5/597/879678/Recent-advances-in-lanthanide-based-metal-organic"},
+      {"t": "Indium-Based Metal-Organic Framework for Efficient Photocatalytic H2", "u": "https://pubs.acs.org/doi/10.1021/acs.inorgchem.1c03628"},
+      {"t": "MOFs for Photocatalytic Hydrogen Production Coupled (ChemPhysChem)", "u": "https://chemistry-europe.onlinelibrary.wiley.com/doi/10.1002/cphc.202500459"}
+    ]},
+    {"n": 4, "results": [
+      {"t": "Progress, problems and prospects of room-temperature superconductivity (arXiv HTML)", "u": "https://arxiv.org/html/2406.11344v1"},
+      {"t": "Criticism of room temperature superconductor 'temporarily removed' (Science)", "u": "https://www.science.org/content/article/criticism-room-temperature-superconductor-temporarily-removed-journal"},
+      {"t": "Consistency and Controversy Analysis in the Hype of Room-Temperature Superconductivity (IEEE)", "u": "https://ieeexplore.ieee.org/document/10739776"},
+      {"t": "'Something is seriously wrong': RT superconductivity study retracted (Science)", "u": "https://www.science.org/content/article/something-seriously-wrong-room-temperature-superconductivity-study-retracted"},
+      {"t": "Supposed room-temperature superconductors fail to convince critics", "u": "https://revistapesquisa.fapesp.br/en/supposed-room-temperature-superconductors-fail-to-convince-critics/"},
+      {"t": "Room-temperature superconductor (Wikipedia)", "u": "https://en.wikipedia.org/wiki/Room-temperature_superconductor"},
+      {"t": "Superconductivity scandal: inside story of deception (Nature)", "u": "https://www.nature.com/articles/d41586-024-00716-2"},
+      {"t": "Room-Temperature Superconductivity Heats Up (ACM)", "u": "https://dl.acm.org/doi/full/10.1145/3686308"},
+      {"t": "Progress, problems and prospects of RT superconductivity (ResearchGate)", "u": "https://www.researchgate.net/publication/381485278_Progress_problems_and_prospects_of_room-temperature_superconductivity"},
+      {"t": "Progress, problems and prospects of room-temperature superconductivity (arXiv)", "u": "https://arxiv.org/abs/2406.11344"}
+    ]},
+    {"n": 5, "results": [
+      {"t": "A Detailed Guide on Indexing Algorithms in Vector Databases", "u": "https://www.analyticsvidhya.com/blog/2024/07/indexing-algorithms-in-vector-databases/"},
+      {"t": "Indexing in Vector Database (KodeKloud)", "u": "https://notes.kodekloud.com/docs/Vector-Database-for-GenAI/Vector-Database-Internals/Indexing-in-Vector-Database/page"},
+      {"t": "Vector Index Algorithms Compared: HNSW, IVF, ScaNN, DiskANN", "u": "https://callsphere.ai/blog/vector-index-algorithms-hnsw-ivf-scann-diskann-2026"},
+      {"t": "Vector Index Algorithms: The Complete Guide (2026)", "u": "https://techjacksolutions.com/ai-knowledge-hub/vector-index-algorithms/"},
+      {"t": "Vector Databases for Production RAG (2026): Pinecone vs Qdrant", "u": "https://www.locionic.com/en/blog/vector-databases-rag"},
+      {"t": "Vector Database Architecture: ANN Indexes, HNSW, IVF (systeminternals)", "u": "https://systeminternals.dev/vector-database/"},
+      {"t": "Vector Database Architecture and Performance (EFFOMA)", "u": "https://effoma.com/blog/vector-database-performance-benchmark-comparison-2026/"},
+      {"t": "Vector Search Algorithms: HNSW, ANN & Similarity Metrics Explained", "u": "https://myengineeringpath.dev/genai-engineer/vector-search/"},
+      {"t": "Strategies for Improving Vector Database Performance (ResearchGate)", "u": "https://www.researchgate.net/publication/389248375_Strategies_for_Improving_Vector_Database_Performance_through_Algorithm_Optimization"},
+      {"t": "Vector Database Indexing Guide (NexProTools)", "u": "https://www.nexprotools.com/blog/vector-database-indexing-hnsw-ivf-pq-ann-search-guide"}
+    ]},
+    {"n": 6, "results": [
+      {"t": "Evaluating Retrieval Augmented Generation: A Comprehensive Review of", "u": "https://link.springer.com/article/10.1007/s42979-026-05134-x"},
+      {"t": "Evaluation of Retrieval-Augmented Generation: A Survey (arXiv)", "u": "https://arxiv.org/abs/2405.07437"},
+      {"t": "Evaluation of Retrieval-Augmented Generation: A Survey (arXiv HTML)", "u": "https://arxiv.org/html/2405.07437v1"},
+      {"t": "A Comprehensive Survey of RAG Evaluation and Benchmarks", "u": "https://www.researchgate.net/publication/396290953_A_Comprehensive_Survey_of_Retrieval-Augmented_Generation_RAG_Evaluation_and_Benchmarks_Perspectives_from_Information_Retrieval_and_LLM"},
+      {"t": "7 RAG benchmarks (EvidentlyAI)", "u": "https://www.evidentlyai.com/blog/rag-benchmarks"},
+      {"t": "Result Evaluation for RAG: Metrics & Best Practices (IBM)", "u": "https://www.ibm.com/think/architectures/rag-cookbook/result-evaluation"},
+      {"t": "MIRAGE-Bench: Multilingual RAG Evaluation Benchmark", "u": "https://mirage-bench.github.io/"},
+      {"t": "Evaluation Metrics for RAG Systems (GeeksforGeeks)", "u": "https://www.geeksforgeeks.org/nlp/evaluation-metrics-for-retrieval-augmented-generation-rag-systems/"},
+      {"t": "RAG Benchmarks Leaderboard: Retrieval Rankings 2026", "u": "https://awesomeagents.ai/leaderboards/rag-benchmarks-leaderboard/"},
+      {"t": "Multimodal RAG Evaluation Benchmark (IEEE)", "u": "https://ieeexplore.ieee.org/document/10683437"}
+    ]},
+    {"n": 7, "results": [
+      {"t": "Towards Greater Leverage: Scaling Laws for Efficient Mixture-of-Experts (arXiv)", "u": "https://arxiv.org/abs/2507.17702"},
+      {"t": "Scaling Laws for Upcycling Mixture-of-Experts Language Models (arXiv)", "u": "https://arxiv.org/abs/2502.03009"},
+      {"t": "Towards a Comprehensive Scaling Law of Mixture-of-Experts (ACL)", "u": "https://aclanthology.org/2026.emnlp-main.1227/"},
+      {"t": "Towards a Comprehensive Scaling Law of MoE (ACL PDF)", "u": "https://aclanthology.org/2026.emnlp-main.1227.pdf"},
+      {"t": "Scaling Laws for Upcycling Mixture-of-Experts (OpenReview)", "u": "https://openreview.net/forum?id=ZBBo19jldX"},
+      {"t": "Towards Greater Leverage (ICLR proceedings)", "u": "https://proceedings.iclr.cc/paper_files/paper/2026/hash/32b640528f5b67975562210f00c131ed-Abstract-Conference.html"},
+      {"t": "Scaling Laws for Fine-Grained Mixture of Experts (PMLR)", "u": "https://proceedings.mlr.press/v235/ludziejewski24a.html"},
+      {"t": "Scaling Laws for Upcycling MoE (ICML poster)", "u": "https://icml.cc/virtual/2025/poster/44873"}
+    ]},
+    {"n": 8, "results": [
+      {"t": "AI Model Releases, November 2026 (Live Tracker, AIFOD)", "u": "https://af.net/realtime/ai-model-releases-november-2026/"},
+      {"t": "AI Model Releases, November 2026 (thehype.news)", "u": "https://thehype.news/calendar/releases/"},
+      {"t": "AI model releases, November 2026 (The Model Gap)", "u": "https://themodelgap.com/new-ai-models"},
+      {"t": "Latest AI Model Releases, November 2026 (aireleasetracker)", "u": "https://aireleasetracker.com/latest"},
+      {"t": "AI Models Released in November 2026 (No Code MBA)", "u": "https://www.nocode.mba/ai-release-tracker/2026/11"},
+      {"t": "November 2026 AI Releases: Claude Fable 5.2, Gemini 4 Carbon (thursdai)", "u": "https://thursdai.news/releases/2026-11"},
+      {"t": "AI Model Releases: November 2026 Update (Essa Mamdani)", "u": "https://essamamdani.com/blog/ai-model-releases-november-2026"},
+      {"t": "November 2026 AI Model Releases: GPT-6 Cyber (chatgbot)", "u": "https://chatgbot.ai/en/blog/november-2026-ai-model-releases"},
+      {"t": "LLM Updates November 2026 (lmmarketcap)", "u": "https://lmmarketcap.com/llm-updates"},
+      {"t": "AI Updates Today (llm-stats.com)", "u": "https://llm-stats.com/llm-updates"}
+    ]},
+    {"n": 9, "results": [
+      {"t": "Yet Another WebFetch MCP Alternative (GitHub)", "u": "https://github.com/ChesterNotChest/Yet-Another-WebFetch-MCP-Alternative"},
+      {"t": "Fetch MCP Server (zcaceres/fetch-mcp)", "u": "https://github.com/zcaceres/fetch-mcp"},
+      {"t": "Best Fetch MCP Server Alternatives 2026 (MyMCPTools)", "u": "https://mymcptools.com/alternatives/fetch"},
+      {"t": "Best Web Scraping & Fetching MCP Servers in 2026 (chatforest)", "u": "https://chatforest.com/guides/best-web-scraping-mcp-servers/"},
+      {"t": "Web Scraping MCP Server Guide 2026 (MewCP)", "u": "https://mewcp.com/blogs/web-scraping-mcp-servers-in-2026-firecrawl-web-fetch-and-the-full-comparison-23c7ea"},
+      {"t": "web-fetch-mcp (PyPI)", "u": "https://pypi.org/project/web-fetch-mcp/"},
+      {"t": "mcp-server-fetch (PyPI)", "u": "https://pypi.org/project/mcp-server-fetch/"},
+      {"t": "Best MCP Servers for Web Scraping (fastcrw)", "u": "https://fastcrw.com/blog/best-mcp-servers-web-scraping"},
+      {"t": "Best MCP Servers for Web Scraping (crawlforge)", "u": "https://www.crawlforge.dev/blog/best-mcp-servers-web-scraping-2026"},
+      {"t": "Best MCP Servers for Web Scraping (context.dev)", "u": "https://www.context.dev/blog/best-mcp-servers-web-scraping-2026"}
+    ]},
+    {"n": 10, "results": [
+      {"t": "Protein structure prediction via deep learning: an in-depth review (PMC)", "u": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12003282/"},
+      {"t": "Jcim 张贵军课题组：深度学习蛋白质结构预测的最新进展（知乎）", "u": "https://zhuanlan.zhihu.com/p/678064357"},
+      {"t": "南大清华等《深度学习蛋白质设计》综述论文（知乎）", "u": "https://zhuanlan.zhihu.com/p/523381964"},
+      {"t": "综述：深度学习在蛋白质结构预测中的最新进展（CSDN）", "u": "https://blog.csdn.net/Lony0223/article/details/111504262"},
+      {"t": "基于深度学习的蛋白质结构预测与设计：诺奖得主的关键模型（alphaXiv）", "u": "https://www.alphaxiv.org/zh/abs/2504.01490"},
+      {"t": "人工智能驱动的蛋白质结构预测进展与应用前景", "u": "http://www.swxzz.com/CN/10.3969/j.issn.2095-1736.2025.05.001"},
+      {"t": "基于机器学习和深度学习的蛋白质结构预测研究进展（ResearchGate）", "u": "https://www.researchgate.net/publication/385281472_jiyujiqixuexiheshenduxuexidedanbaizhijiegouyuceyanjiujinzhan"},
+      {"t": "综述：深度学习彻底改变了蛋白质研究（生物通）", "u": "https://www.ebiotrade.com/newsf/2026-3/20260317000135643.htm"},
+      {"t": "深度学习方法在蛋白质结构预测领域的应用（清华大学出版社）", "u": "https://www.tup.tsinghua.edu.cn/bookscenter/book_09663601.html"},
+      {"t": "综述：深度学习在蛋白质序列、结构、功能及相互作用预测（生物通）", "u": "https://www.ebiotrade.com/newsf/2025-5/20250521133149170.htm"}
+    ]},
+    {"n": 11, "results": [
+      {"t": "Machine Learning in Climate Downscaling: A Critical Review (MDPI)", "u": "https://www.mdpi.com/2073-4441/18/2/271"},
+      {"t": "Machine Learning Techniques for Climate Data Downscaling (Nature subject page)", "u": "https://www.nature.com/subjects/machine-learning-techniques-for-climate-data-downscaling"},
+      {"t": "Fast, scale-adaptive and uncertainty-aware downscaling (Nature Machine Intelligence)", "u": "https://www.nature.com/articles/s42256-025-00980-5"},
+      {"t": "Climate Model Downscaling (EPRI user guide)", "u": "https://apps.epri.com/climate-data-user-guide/en/climate-model-downscaling.html"},
+      {"t": "Dynamical-generative downscaling of climate model ensembles (PNAS)", "u": "https://www.pnas.org/doi/10.1073/pnas.2420288122"},
+      {"t": "ML-based Downscaling of Climate Models Using Remote Sensing", "u": "https://www.thesesjournal.com/index.php/1/article/view/1999"},
+      {"t": "Machine Learning Frameworks for Downscaling Climate (Springer)", "u": "https://link.springer.com/chapter/10.1007/978-3-032-10753-4_26"},
+      {"t": "ML-based downscaling of modelled climate change impacts (HESS)", "u": "https://hess.copernicus.org/articles/26/5859/2022/"},
+      {"t": "Using Machine Learning to Cut the Cost of Dynamical Downscaling (AGU)", "u": "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2022EF003291"},
+      {"t": "Intercomparison of machine learning methods for statistical downscaling (Springer)", "u": "https://link.springer.com/article/10.1007/s00704-018-2613-3"}
+    ]},
+    {"n": 12, "results": [
+      {"t": "PostgreSQL: Documentation 18: 29.7. Conflicts", "u": "https://www.postgresql.org/docs/current/logical-replication-conflicts.html"},
+      {"t": "PostgreSQL: Documentation 18: Chapter 29. Logical Replication", "u": "https://www.postgresql.org/docs/current/logical-replication.html"},
+      {"t": "Conflict Detection and Resolution (PostgreSQL wiki)", "u": "https://wiki.postgresql.org/wiki/Conflict_Detection_and_Resolution"},
+      {"t": "PostgreSQL Documentation 14: 31.3. Conflicts (Postgres Pro)", "u": "https://postgrespro.com/docs/postgresql/14/logical-replication-conflicts"},
+      {"t": "Detection and resolution of conflicts in PostgreSQL logical replication (Fastware)", "u": "https://www.postgresql.fastware.com/blog/detection-and-resolution-of-conflicts-in-postgresql-logical-replication"},
+      {"t": "29.7. Conflicts, PostgreSQL 18 (PG.CENTER)", "u": "https://pg.center/docs/18/logical-replication-conflicts.html"},
+      {"t": "Resolving Replication Conflicts in PostgreSQL (runebook)", "u": "https://runebook.dev/en/docs/postgresql/logical-replication-conflicts"},
+      {"t": "第29章 論理レプリケーション (postgresql.jp)", "u": "https://www.postgresql.jp/docs/17/logical-replication.html"},
+      {"t": "How to handle logical replication conflicts in PostgreSQL (Fastware)", "u": "https://www.postgresql.fastware.com/blog/how-to-handle-logical-replication-conflicts-in-postgresql"},
+      {"t": "PostgreSQL Logical Replication Conflicts Explained (MonPG)", "u": "https://monpg.app/blog/postgresql-logical-replication-conflicts"}
+    ]}
+  ]
+}
