@@ -1,6 +1,6 @@
 # RESEARCH-ORCHESTRATION-WORKFLOW
 
-研究工作流规范：四种模式、九步标准流程、停止规则与输出规范。Agent 按本档执行；命令速查见技能 `~/.agents/skills/research-engine/SKILL.md`。
+研究工作流规范：四种模式、九步标准流程、停止规则与输出规范。Agent 按本档执行；命令速查见技能 `~/.agents/skills/research-engine/SKILL.md`（技能源：[Keng0nion/research-engine-skill](https://github.com/Keng0nion/research-engine-skill)）。
 
 ## 模式选择规则
 

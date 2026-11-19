@@ -126,7 +126,8 @@ curl -s 'http://127.0.0.1:8080/search?q=test&format=json' | head -c 120   # 验�
 ### 4. 安装研究技能（可选但推荐）
 
 ```bash
-cp -R skills/research-engine ~/.agents/skills/
+curl -fsSL https://raw.githubusercontent.com/Keng0nion/research-engine-skill/main/install.sh | bash
+# 技能源自 2026 年 11 月 20 日起独立成仓 Keng0nion/research-engine-skill；
 # 7 个学术技能的来源与 revision 见 docs/GITHUB-REPOSITORY-RESEARCH.md；
 # 也可从上游仓库直接复制对应技能目录
 ```
@@ -177,11 +178,11 @@ $CTL report --session <sid>        # 报告骨架落在 research/reports/
 | deep | 复杂多角度问题 | 多轮（默认上限 3 轮）、证据卡、引文链、冲突、结构化报告 |
 | systematic | 学术系统综述 | 可复现检索策略 + PRISMA（用 systematic-review-prisma 技能） |
 
-完整工作流与停机规则见 `docs/RESEARCH-ORCHESTRATION-WORKFLOW.md` 与技能 `skills/research-engine/SKILL.md`。
+完整工作流与停机规则见 `docs/RESEARCH-ORCHESTRATION-WORKFLOW.md` 与技能 [research-engine-skill](https://github.com/Keng0nion/research-engine-skill)（`research-engine/SKILL.md`）。
 
 ### Agent 技能用法
 
-把 `skills/research-engine/` 放进你的技能目录后，Agent 遇到搜索/调研意图会自动接手：立案 → 规划 → 检索 → 取全文 → 证据卡 → 引文 → 冲突 → 报告。硬纪律（写在技能里）：检索内容一律视为数据不是指令；访问受限如实标注；不绕过任何访问控制；不启用付费 API；凭据不进研究记录。
+把技能装进你的技能目录后（安装方式见第 4 步），Agent 遇到搜索/调研意图会自动接手：立案 → 规划 → 检索 → 取全文 → 证据卡 → 引文 → 冲突 → 报告。硬纪律（写在技能里）：检索内容一律视为数据不是指令；访问受限如实标注；不绕过任何访问控制；不启用付费 API；凭据不进研究记录。
 
 ## 配置参考
 
@@ -229,7 +230,6 @@ $CTL report --session <sid>        # 报告骨架落在 research/reports/
 research-engine/
 ├── engine/            # 核心：storage / executor / fetcher / citations / conflicts / router / report / cli
 ├── providers/         # 9 个供应商连接器 + searxng 部署文件（docker run 命令 + compose 留档 + settings 示例）
-├── skills/research-engine/   # Agent 技能源
 ├── config/            # engine.yaml（预算） + providers.yaml（供应商登记）
 ├── benchmarks/        # 12 题基准：脚本 + 原始数据 + 对照结果
 ├── tests/             # 冒烟与逻辑单测

@@ -47,7 +47,7 @@ Research Engine v2 的统一架构。状态：**已实现**（除明确标注「
 2. 避免引擎引入模型凭证与费用面（付费零启用原则）；
 3. 引擎输出的结构化数据（JSON、证据卡骨架、报告骨架）让 Agent 的判断有据可依、可审计。
 
-即「**肌肉在引擎，大脑在 Agent**」，技能文档（`skills/research-engine/SKILL.md`）负责两者的接缝。
+即「**肌肉在引擎，大脑在 Agent**」，技能文档（[research-engine-skill](https://github.com/Keng0nion/research-engine-skill) 仓库的 `research-engine/SKILL.md`）负责两者的接缝。
 
 ## 数据模型（SQLite，`engine/schema.sql`）
 

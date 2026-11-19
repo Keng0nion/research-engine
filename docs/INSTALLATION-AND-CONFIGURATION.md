@@ -12,7 +12,7 @@
 | 研究数据 | `research/research.db`；文档 `research/{papers,websites}`；报告 `research/reports` |
 | SearXNG 部署文件 | `providers/searxng/`（compose 留档 + settings.yml） |
 | 审计证据 | `docs/audit-raw/`（8 份原始报告） |
-| 研究技能 | `~/.agents/skills/research-engine/`（源在项目 `skills/`） |
+| 研究技能 | `~/.agents/skills/research-engine/`（源在 [Keng0nion/research-engine-skill](https://github.com/Keng0nion/research-engine-skill)） |
 | 学术技能 | `~/.agents/skills/{paper-lookup, citation-verification, systematic-review-prisma, bibtex-hygiene, reference-manager-interop, database-lookup, nature-citation}` |
 | MCP 配置 | `~/.zcode/cli/config.json` → `mcp.servers` |
 
